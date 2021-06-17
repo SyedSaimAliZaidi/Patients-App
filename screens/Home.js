@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { Block, theme } from 'galio-framework';
+import { StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
+import { Block, theme, Text } from 'galio-framework';
 
-import { Card } from '../components';
+import { Card, Button } from '../components';
 import articles from '../constants/articles';
+import { Images, argonTheme } from "../constants";
 const { width } = Dimensions.get('screen');
 
 class Home extends React.Component {
@@ -13,13 +14,27 @@ class Home extends React.Component {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.articles}>
         <Block flex>
-          <Card item={articles[0]} horizontal  />
-          <Block flex row>
-            <Card item={articles[1]} style={{ marginRight: theme.SIZES.BASE }} />
-            <Card item={articles[2]} />
+          <Block center>
+            <Image style={{width:200, height:200}} source={Images.logoImage}/>
+            <Text color={argonTheme.COLORS.PRIMARY}  style={{fontSize:18, marginTop:18, fontWeight:"bold"}}>john.doe@gmail.com</Text>
           </Block>
-          <Card item={articles[3]} horizontal />
-          <Card item={articles[4]} full />
+          <Block center style={{marginTop:80}}>
+            <Button color="primary"  size="large">
+              <Text bold size={14} color={argonTheme.COLORS.WHITE}>
+                Medical Records
+              </Text>
+            </Button>
+            <Button color="primary"  size="large">
+              <Text bold size={14} color={argonTheme.COLORS.WHITE}>
+                General Prescription
+              </Text>
+            </Button>
+            {/* <Button style={{backgroundColor:"#00BFFF", height:60}} size="large" round>Medical Records</Button>
+            <Button style={{backgroundColor:"#00BFFF", height:60}} size="large" round>General Prescription</Button> */}
+          </Block>
+          <Block center>
+            <Text color={argonTheme.COLORS.PRIMARY} style={{fontSize:12, marginTop:50, fontWeight:"normal"}} >Powered By Neurocomputation lab, NCAI</Text>
+          </Block>
         </Block>
       </ScrollView>
     )
@@ -37,11 +52,16 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   home: {
     width: width,    
+    backgroundColor: "white"
   },
   articles: {
+    marginTop: 50,
     width: width - theme.SIZES.BASE * 2,
     paddingVertical: theme.SIZES.BASE,
   },
+  button: {
+    height: 60,
+  }
 });
 
 export default Home;

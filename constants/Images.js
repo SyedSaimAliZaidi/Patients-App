@@ -8,6 +8,9 @@ const Pro = require("../assets/imgs/getPro-bg.png");
 const ArgonLogo = require("../assets/imgs/argonlogo.png");
 const iOSLogo = require("../assets/imgs/ios.png");
 const androidLogo = require("../assets/imgs/android.png");
+
+const logoImage = require('../assets/images/add-plus-pngrepo-com.png');
+
 // internet imgs
 
 const ProfilePicture = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?fit=crop&w=1650&q=80';
@@ -37,5 +40,6 @@ export default {
   Pro,
   ArgonLogo,
   iOSLogo,
-  androidLogo
+  androidLogo,
+  logoImage
 };

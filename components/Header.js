@@ -185,7 +185,7 @@ class Header extends React.Component {
           title={title}
           style={navbarStyles}
           transparent={transparent}
-          right={this.renderRight()}
+          // right={this.renderRight()}
           rightStyle={{ alignItems: 'center' }}
           left={
             <Icon 
@@ -204,7 +204,7 @@ class Header extends React.Component {
           ]}
           {...props}
         />
-        {this.renderHeader()}
+        {/* {this.renderHeader()} */}
       </Block>
     );
   }
@@ -222,8 +222,8 @@ const styles = StyleSheet.create({
   },
   navbar: {
     paddingVertical: 0,
-    paddingBottom: theme.SIZES.BASE * 1.5,
-    paddingTop: iPhoneX ? theme.SIZES.BASE * 4 : theme.SIZES.BASE,
+    // paddingBottom: theme.SIZES.BASE * 1.5,
+    // paddingTop: iPhoneX ? theme.SIZES.BASE * 4 : theme.SIZES.BASE,
     zIndex: 5,
   },
   shadow: {
