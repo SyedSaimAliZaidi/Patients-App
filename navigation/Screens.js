@@ -22,6 +22,11 @@ import CustomDrawerContent from "./Menu";
 // header for screens
 import { Icon, Header } from "../components";
 import { argonTheme, tabs } from "../constants";
+import MedicalRecords from "../screens/MedicalRecords";
+import GeneralPrescription from "../screens/GeneralPrescription";
+import QRcode from "../screens/components/QRcode"
+import Trends from "../screens/components/Trends"
+import ImageBrowser from "../screens/components/ImageBrowser"
 
 const { width } = Dimensions.get("screen");
 
@@ -213,7 +218,7 @@ function TabStack(props) {
 
 export default function OnboardingStack(props) {
   return (
-    <Stack.Navigator mode="card" headerMode="none">
+    <Stack.Navigator mode="card" headerMode="none" initialRouteName="App">
       {/* <Stack.Screen
         name="Onboarding"
         component={Onboarding}
@@ -221,6 +226,11 @@ export default function OnboardingStack(props) {
           headerTransparent: true
         }}
       /> */}
+      <Stack.Screen name="ImageBrowser" component={ImageBrowser} options={{headerShown:"none"}} initialParams={{ type: 0 }}/>
+      <Stack.Screen name="Trends" component={Trends} options={{headerShown:"none"}} initialParams={{ type: 0 }}/>
+      <Stack.Screen name="QRcode" component={QRcode} options={{headerShown:"none"}} initialParams={{ type: 0 }}/>
+      <Stack.Screen name="GeneralPrescription" component={GeneralPrescription} options={{headerShown:"none"}}/>
+      <Stack.Screen name="MedicalRecords" component={MedicalRecords} options={{headerShown:"none"}}/>
       <Stack.Screen name="App" component={TabStack} options={{headerShown:"none"}}/>
     </Stack.Navigator>
   );

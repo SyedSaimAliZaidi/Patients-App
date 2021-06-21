@@ -7,8 +7,9 @@ import articles from '../constants/articles';
 import { Images, argonTheme } from "../constants";
 const { width } = Dimensions.get('screen');
 
-class Home extends React.Component {
-  renderArticles = () => {
+export default function Home({navigation, route}){
+  
+  const renderArticles = () => {
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -19,12 +20,12 @@ class Home extends React.Component {
             <Text color={argonTheme.COLORS.PRIMARY}  style={{fontSize:18, marginTop:18, fontWeight:"bold"}}>john.doe@gmail.com</Text>
           </Block>
           <Block center style={{marginTop:80}}>
-            <Button color="primary"  size="large">
+            <Button color="primary"  size="large" onPress={()=>navigation.navigate("MedicalRecords")}>
               <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                 Medical Records
               </Text>
             </Button>
-            <Button color="primary"  size="large">
+            <Button color="primary"  size="large" onPress={()=>navigation.navigate("GeneralPrescription")}>
               <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                 General Prescription
               </Text>
@@ -40,13 +41,12 @@ class Home extends React.Component {
     )
   }
 
-  render() {
-    return (
-      <Block flex center style={styles.home}>
-        {this.renderArticles()}
-      </Block>
-    );
-  }
+  return (
+    <Block flex center style={styles.home}>
+      {renderArticles()}
+    </Block>
+  );
+  
 }
 
 const styles = StyleSheet.create({
@@ -64,4 +64,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Home;
