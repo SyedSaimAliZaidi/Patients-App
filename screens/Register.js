@@ -6,14 +6,71 @@ import {
   StatusBar,
   KeyboardAvoidingView
 } from "react-native";
-import { Block, Checkbox, Text, theme } from "galio-framework";
+import { Block, Checkbox, Radio, Text, theme } from "galio-framework";
 
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
+import ValidationComponent from 'react-native-form-validator';
 
 const { width, height } = Dimensions.get("screen");
 
 class Register extends React.Component {
+  constructor(props) {   
+    super(props)
+    this.state = {
+      p_name: '',
+      address: '',
+      contact_no: '',
+      dob: '',
+      radiobtn: ['Male', 'Female', 'Other'],
+      checked: 0,
+      gender: '',
+      email: '',
+      password:'',
+    };
+  }
+  UserRegistrationFunction = () =>{
+    const a=this.validate({
+      p_name: { required: true},
+      email: {email: true, required: true},
+      contact_no: {numbers: true, required: true},
+      dob: {date: 'YYYY-MM-DD', required: true},
+      password :{password: true, minlength:5, maxlength:15 , required: true}
+    });
+    if(a==true)
+    {      
+      const { p_name }  = this.state;
+      const { address }  = this.state;
+      const { contact_no }  = this.state ;
+      const { dob }  = this.state ;
+      const { gender } = this.state;
+      const { email }  = this.state ;
+      const { password }  = this.state ;
+      fetch('http://instrux.live/healthapp_patient/API/new/email.php', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          p_name: p_name,
+          address: address,
+          contact_no: contact_no,
+          dob: dob,
+          gender : gender,
+          email: email,
+          password: password,
+        })  
+      })
+      .then((response) => response.text())
+      .then((responseJson) => {
+        Alert.alert(responseJson);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }
+  }
   render() {
     return (
       <Block flex middle>
@@ -24,50 +81,14 @@ class Register extends React.Component {
         >
           <Block safe flex middle>
             <Block style={styles.registerContainer}>
-              <Block flex={0.25} middle style={styles.socialConnect}>
-                <Text color="#8898AA" size={12}>
-                  Sign up with
-                </Text>
-                <Block row style={{ marginTop: theme.SIZES.BASE }}>
-                  <Button style={{ ...styles.socialButtons, marginRight: 30 }}>
-                    <Block row>
-                      <Icon
-                        name="logo-github"
-                        family="Ionicon"
-                        size={14}
-                        color={"black"}
-                        style={{ marginTop: 2, marginRight: 5 }}
-                      />
-                      <Text style={styles.socialTextButtons}>GITHUB</Text>
-                    </Block>
-                  </Button>
-                  <Button style={styles.socialButtons}>
-                    <Block row>
-                      <Icon
-                        name="logo-google"
-                        family="Ionicon"
-                        size={14}
-                        color={"black"}
-                        style={{ marginTop: 2, marginRight: 5 }}
-                      />
-                      <Text style={styles.socialTextButtons}>GOOGLE</Text>
-                    </Block>
-                  </Button>
-                </Block>
-              </Block>
               <Block flex>
-                <Block flex={0.17} middle>
-                  <Text color="#8898AA" size={12}>
-                    Or sign up the classic way
-                  </Text>
-                </Block>
                 <Block flex center>
                   <KeyboardAvoidingView
                     style={{ flex: 1 }}
                     behavior="padding"
                     enabled
                   >
-                    <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                    <Block width={width * 0.8}>
                       <Input
                         borderless
                         placeholder="Name"
@@ -82,7 +103,52 @@ class Register extends React.Component {
                         }
                       />
                     </Block>
-                    <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                    <Block width={width * 0.8}>
+                      <Input
+                        borderless
+                        placeholder="Address"
+                        iconContent={
+                          <Icon
+                            size={16}
+                            color={argonTheme.COLORS.ICON}
+                            name="hat-3"
+                            family="ArgonExtra"
+                            style={styles.inputIcons}
+                          />
+                        }
+                      />
+                    </Block>
+                    <Block width={width * 0.8}>
+                      <Input
+                        borderless
+                        placeholder="Contact Number"
+                        iconContent={
+                          <Icon
+                            size={16}
+                            color={argonTheme.COLORS.ICON}
+                            name="hat-3"
+                            family="ArgonExtra"
+                            style={styles.inputIcons}
+                          />
+                        }
+                      />
+                    </Block>
+                    <Block width={width * 0.8}>
+                      <Input
+                        borderless
+                        placeholder="Name"
+                        iconContent={
+                          <Icon
+                            size={16}
+                            color={argonTheme.COLORS.ICON}
+                            name="hat-3"
+                            family="ArgonExtra"
+                            style={styles.inputIcons}
+                          />
+                        }
+                      />
+                    </Block>
+                    <Block width={width * 0.8}>
                       <Input
                         borderless
                         placeholder="Email"
@@ -112,39 +178,16 @@ class Register extends React.Component {
                           />
                         }
                       />
-                      <Block row style={styles.passwordCheck}>
-                        <Text size={12} color={argonTheme.COLORS.MUTED}>
-                          password strength:
-                        </Text>
-                        <Text bold size={12} color={argonTheme.COLORS.SUCCESS}>
-                          {" "}
-                          strong
-                        </Text>
-                      </Block>
                     </Block>
-                    <Block row width={width * 0.75}>
-                      <Checkbox
-                        checkboxStyle={{
-                          borderWidth: 3
-                        }}
-                        color={argonTheme.COLORS.PRIMARY}
-                        label="I agree with the"
-                      />
-                      <Button
-                        style={{ width: 100 }}
-                        color="transparent"
-                        textStyle={{
-                          color: argonTheme.COLORS.PRIMARY,
-                          fontSize: 14
-                        }}
-                      >
-                        Privacy Policy
-                      </Button>
+                    <Block row style={{justifyContent:"space-evenly", marginVertical: 10}}>                         
+                      <Radio  color={argonTheme.COLORS.DEFAULT} label="Male" />
+                      <Radio  color={argonTheme.COLORS.DEFAULT} label="Female" />
+                      <Radio  color={argonTheme.COLORS.DEFAULT} label="Other" />
                     </Block>
                     <Block middle>
                       <Button color="primary" style={styles.createButton}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                          CREATE ACCOUNT
+                          Register
                         </Text>
                       </Button>
                     </Block>
@@ -207,8 +250,8 @@ const styles = StyleSheet.create({
     paddingBottom: 30
   },
   createButton: {
-    width: width * 0.5,
-    marginTop: 25
+    width: width * 0.7,
+    // marginTop: 25
   }
 });
 
