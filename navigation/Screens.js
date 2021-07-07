@@ -67,15 +67,7 @@ function TabStack(props) {
 
 export default function OnboardingStack(props) {
   return (
-    <Stack.Navigator mode="card" headerMode="none" initialRouteName="Login">
-      {/* <Stack.Screen
-        name="Onboarding"
-        component={Onboarding}
-        option={{
-          headerTransparent: true
-        }}
-      /> */}
-            
+    <Stack.Navigator mode="card" headerMode="none" initialRouteName="App">
       <Stack.Screen name="Login" component={Login} options={{headerShown:"none"}}/>
       <Stack.Screen name="Register" component={Register} options={{headerShown:"none"}}/>
       <Stack.Screen name="ImageBrowser" component={ImageBrowser} options={{headerShown:"none"}} initialParams={{ type: 0 }}/>

@@ -15,11 +15,11 @@ export default function Home({navigation, route}){
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.articles}>
         <Block flex>
-          <Block center>
-            <Image style={{width:200, height:200}} source={Images.logoImage}/>
-            <Text color={argonTheme.COLORS.PRIMARY}  style={{fontSize:18, marginTop:18, fontWeight:"bold"}}>john.doe@gmail.com</Text>
+          <Block middle  style={{marginVertical:80}}>
+            <Image tintColor={argonTheme.COLORS.PRIMARY} style={{width:200, height:200}} source={Images.logoImage}/>
+            <Text color={argonTheme.COLORS.PRIMARY}  style={{fontSize:18, fontWeight:"bold"}}>john.doe@gmail.com</Text>
           </Block>
-          <Block center style={{marginTop:80}}>
+          <Block middle>
             <Button color="primary"  size="large" onPress={()=>navigation.navigate("MedicalRecords")}>
               <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                 Medical Records
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white"
   },
   articles: {
-    marginTop: 50,
+    // marginTop: 50,
     width: width - theme.SIZES.BASE * 2,
     paddingVertical: theme.SIZES.BASE,
   },

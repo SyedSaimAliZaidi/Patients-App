@@ -31,11 +31,11 @@ export default function Home(props){
       <ScrollView
         contentContainerStyle={styles.articles} showsVerticalScrollIndicator={false}>          
         <Block flex>
-          <Block center>
-            <Image style={{width:200, height:200}} source={Images.logoImage}/>
-            <Text color={argonTheme.COLORS.PRIMARY}  style={{fontSize:18, marginTop:18, fontWeight:"bold"}}>john.doe@gmail.com</Text>
+          <Block middle  style={{marginVertical:30}}>
+            <Image tintColor={argonTheme.COLORS.PRIMARY} style={{width:200, height:200}} source={Images.logoImage}/>
+            <Text color={argonTheme.COLORS.PRIMARY}  style={{fontSize:18, fontWeight:"bold"}}>john.doe@gmail.com</Text>
           </Block>
-          <Block center style={{marginTop:20}}>
+          <Block middle style={{marginTop:20}}>
             <ScrollView >
 
               <List.Section style={styles.home}>
@@ -49,7 +49,7 @@ export default function Home(props){
                           title={<Text color={argonTheme.COLORS.PRIMARY} >{param.title}</Text>}
                         >
                           <List.Item title={
-                            <Button color="primary"  size="large" onPress={()=>navigation.navigate('ImageBrowser',{type: i})}>
+                            <Button color="primary" onPress={()=>navigation.navigate('ImageBrowser',{type: i})}>
                               <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                                 Scan Report
                               </Text>

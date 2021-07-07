@@ -9,7 +9,7 @@ const ArgonLogo = require("../assets/imgs/argonlogo.png");
 const iOSLogo = require("../assets/imgs/ios.png");
 const androidLogo = require("../assets/imgs/android.png");
 
-const logoImage = require('../assets/images/add-plus-pngrepo-com.png');
+const logoImage = require('../assets/images/main1.png');
 
 // internet imgs
 

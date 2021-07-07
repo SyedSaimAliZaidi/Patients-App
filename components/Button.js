@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import PropTypes from 'prop-types';
 import { Button } from "galio-framework";
 
 import argonTheme from "../constants/Theme";
+const { width } = Dimensions.get('screen');
 
 class ArButton extends React.Component {
   render() {
@@ -12,7 +13,7 @@ class ArButton extends React.Component {
     const colorStyle = color && argonTheme.COLORS[color.toUpperCase()];
 
     const buttonStyles = [
-      small && styles.smallButton,
+      !small && styles.smallButton,
       color && { backgroundColor: colorStyle },
       !shadowless && styles.shadow,
       {...style}
@@ -42,8 +43,8 @@ ArButton.propTypes = {
 
 const styles = StyleSheet.create({
   smallButton: {
-    width: 75,
-    height: 28
+    width: width-60,
+    height: 43
   },
   shadow: {
     shadowColor: 'black',

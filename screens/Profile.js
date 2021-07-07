@@ -35,7 +35,7 @@ class Profile extends React.Component {
   render() {
     return (
       <Block flex style={styles.profile}>
-        <Block flex style={{marginTop:50}}>
+        <Block flex >
           <ImageBackground
             source={Images.ProfileBackground}
             style={styles.profileContainer}
@@ -43,11 +43,12 @@ class Profile extends React.Component {
           >
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{ width, marginTop: '25%' }}
+              style={{ width, }}
             >
               <Card flex style={styles.profileCard}>
                 <Block middle style={styles.avatarContainer}>
                   <Image
+                    tintColor={argonTheme.COLORS.PRIMARY}
                     // source={{ uri: Images.ProfilePicture }}
                     source={Images.logoImage}
                     style={styles.avatar}
@@ -129,7 +130,7 @@ class Profile extends React.Component {
 
 const styles = StyleSheet.create({
   profile: {
-    marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
+    // marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
     flex: 1
   },
   profileContainer: {
@@ -159,8 +160,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40
   },
   avatarContainer: {
-    position: "relative",
-    marginTop: -140
+
+    // position: "relative",
+    marginTop: -50
   },
   avatar: {
     width: 124,

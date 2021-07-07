@@ -4,7 +4,7 @@ import { Block } from 'galio-framework';
 import { Card, Button } from '../../components';
 // import ImagePicker from 'expo-image-picker';
 import * as ImagePicker from 'expo-image-picker';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {
   SafeAreaView,
   StyleSheet,
@@ -86,17 +86,17 @@ export default class App extends Component {
   //   });
   // }
   checktype = () => {
-    let p=this.props.navigation.state.params.type
-    if(p==0)
-    return 'sugardata.php'
-    if(p==1)
-    return 'sugarrandom.php'
+    let p = this.props.navigation.state.params.type
+    if (p == 0)
+      return 'sugardata.php'
+    if (p == 1)
+      return 'sugarrandom.php'
     else
-    return 'cbcscan.php'
+      return 'cbcscan.php'
   }
 
 
-  launchCamera = async() => {
+  launchCamera = async () => {
     let options = {
       storageOptions: {
         skipBackup: true,
@@ -104,129 +104,127 @@ export default class App extends Component {
       },
     };
 
-    let response=  await ImagePicker.launchCameraAsync(options)
+    let response = await ImagePicker.launchCameraAsync(options)
     if (response.cancelled) {
       return;
     }
     this.setState({
-            filePath: response,
-            fileData: response.data,
-            fileUri: response.uri
-          });
-    const userToken =await AsyncStorage.getItem('sessionid');
-    
+      filePath: response,
+      fileData: response.data,
+      fileUri: response.uri
+    });
+    const userToken = await AsyncStorage.getItem('sessionid');
+
     let localUri = response.uri;
     let filename = localUri.split('/').pop();
-  
+
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
-  
+
     let formData = new FormData();
-  let email = userToken;
-   formData.append('photo', { uri: localUri, name: filename, type });
-   formData.append("email", userToken); // number 123456 is immediately converted to a string "123456"
-   //http://192.168.1.100:80/xampp/htdocs/healthapp/upload.php
-  //https://allinonehapp.000webhostapp.com/API/upload.php
-  // https://allinonehapp.000webhostapp.com/API/imagestore.php
- // C:\xampp\htdocs\healthapp
-//  http://instrux.live/healthapp_patient/API/test/check.php
+    let email = userToken;
+    formData.append('photo', { uri: localUri, name: filename, type });
+    formData.append("email", userToken); // number 123456 is immediately converted to a string "123456"
+    //http://192.168.1.100:80/xampp/htdocs/healthapp/upload.php
+    //https://allinonehapp.000webhostapp.com/API/upload.php
+    // https://allinonehapp.000webhostapp.com/API/imagestore.php
+    // C:\xampp\htdocs\healthapp
+    //  http://instrux.live/healthapp_patient/API/test/check.php
 
-let a=this.checktype()
-// const uri = 'http://instrux.live/healthapp_patient/API/trends-ai/'+ a+ '.php?email='+this.state.email;
+    let a = this.checktype()
+    // const uri = 'http://instrux.live/healthapp_patient/API/trends-ai/'+ a+ '.php?email='+this.state.email;
 
-     return await fetch('http://instrux.live/healthapp_patient/API/test/'+ a , {
+    return await fetch('http://instrux.live/healthapp_patient/API/test/' + a, {
       method: 'POST',
       body: formData,
       header: {
         // 'Accept': 'application/json',
         'Content-type': 'multipart/form-data',
       },
-     
+
     }).then((response) => response.text())
-            .then((responseJson) => {
-       
-      // Showing response message coming from server after inserting records.
-              Alert.alert(responseJson);
-       
-            }).catch((error) => {
-              console.error(error);
-    });
+      .then((responseJson) => {
+
+        // Showing response message coming from server after inserting records.
+        Alert.alert(responseJson);
+
+      }).catch((error) => {
+        console.error(error);
+      });
   }
 
 
 
 
-  
 
-  launchImageLibrary = async() => {
+
+  launchImageLibrary = async () => {
     let options = {
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
     };
-    
-    let response= await ImagePicker.launchImageLibraryAsync(options)
+
+    let response = await ImagePicker.launchImageLibraryAsync(options)
     if (response.cancelled) {
       return;
     }
     this.setState({
-            filePath: response,
-            fileData: response.data,
-            fileUri: response.uri
-          });
-    const userToken =await AsyncStorage.getItem('sessionid');
-    
+      filePath: response,
+      fileData: response.data,
+      fileUri: response.uri
+    });
+    const userToken = await AsyncStorage.getItem('sessionid');
+
     let localUri = response.uri;
     let filename = localUri.split('/').pop();
-  
+
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
-  
+
     let formData = new FormData();
-  let email = userToken;
-   formData.append('photo', { uri: localUri, name: filename, type });
-   formData.append("email", userToken); // number 123456 is immediately converted to a string "123456"
-   //http://192.168.1.100:80/xampp/htdocs/healthapp/upload.php
-  //https://allinonehapp.000webhostapp.com/API/upload.php
+    let email = userToken;
+    formData.append('photo', { uri: localUri, name: filename, type });
+    formData.append("email", userToken); // number 123456 is immediately converted to a string "123456"
+    //http://192.168.1.100:80/xampp/htdocs/healthapp/upload.php
+    //https://allinonehapp.000webhostapp.com/API/upload.php
 
- // C:\xampp\htdocs\healthapp
-//  http://instrux.live/healthapp_patient/API/test/check.php
+    // C:\xampp\htdocs\healthapp
+    //  http://instrux.live/healthapp_patient/API/test/check.php
 
 
-let a=this.checktype()
-     return await fetch('http://instrux.live/healthapp_patient/API/test/'+ a, {
+    let a = this.checktype()
+    return await fetch('http://instrux.live/healthapp_patient/API/test/' + a, {
       method: 'POST',
       body: formData,
       header: {
         // 'Accept': 'application/json',
         'Content-type': 'multipart/form-data',
       },
-     
+
     }).then((response) => response.text())
-            .then((responseJson) => {
-       
-      // Showing response message coming from server after inserting records.
-              Alert.alert(responseJson);
-       
-            }).catch((error) => {
-              console.error(error);
-    });
-    
-    
+      .then((responseJson) => {
+        Alert.alert(responseJson);
+
+      }).catch((error) => {
+        console.error(error);
+      });
+
+
   }
 
   renderFileData() {
     if (this.state.fileData) {
-      return <Image source={{ uri: 'data:image/jpeg;base64,'  + this.state.fileData }}
+      return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
         style={styles.images}
       />
     } else {
-      return <Image source={require('./camera.png')}
+      return <Image source={require('./main2.png')}
+        tintColor={argonTheme.COLORS.PRIMARY}
         style={styles.images}
-      
       />
-      
+
     }
   }
 
@@ -238,54 +236,35 @@ let a=this.checktype()
       />
     } else {
       return <Image
-        source={require('./camera.png')}
+        tintColor={argonTheme.COLORS.PRIMARY}
+        source={require('./main2.png')}
         style={styles.images}
       />
     }
   }
   render() {
     return (
-      <Block flex style={{backgroundColor:'white'}}>
+      <Block middle style={{ backgroundColor: 'white', flex: 1, justifyContent: 'center'}}>
         <SafeAreaView>
-          <View style={styles.body}>
-            {/* <Text style={{textAlign:'center',fontSize:20,paddingBottom:10}} >Pick Images from Camera & Gallery</Text> */}
-            <View style={styles.ImageSections}>
-              {/* <View>
-                {this.renderFileData()}
-                <Text  style={{textAlign:'center'}}>Base 64 String</Text>
-              </View> */}
-              <View>
-                {this.renderFileUri()}
-                {/* <Text style={{textAlign:'center'}}>File Uri</Text> */}
-              </View>
+          <Block middle style={{marginVertical:100}}>
+            <View>
+              {this.renderFileUri()}
             </View>
-
-            <View style={styles.btnParentSection}>
-              {/* <TouchableOpacity onPress={this.chooseImage} style={styles.btnSection}  >
-                <Text style={styles.btnText}>Choose File</Text>
-              </TouchableOpacity> */}
-
-              {/* <TouchableOpacity onPress={this.launchCamera} style={styles.btnSection}  >
-                <Text style={styles.btnText}>SCAN REPORT</Text>
-              </TouchableOpacity> */}
-              <Button color="primary"  size="large" round onPress={this.chooseImage} >
-                <Text bold size={14} style={{color:"white"}}>
-                  Scan Report
-                </Text>
-              </Button>
-              <Button color="primary"  size="large" round onPress={this.launchImageLibrary}>
-                <Text bold size={14} style={{color:"white"}}>
-                  Select Report
-                </Text>
-              </Button>
-              {/* <TouchableOpacity onPress={this.launchImageLibrary} style={styles.btnSection}  >
-                <Text style={styles.btnText}>SELECT REPORT</Text>
-              </TouchableOpacity> */}
-            </View>
-
-          </View>
+          </Block>
+          <Block middle style={styles.btnParentSection}>
+            <Button color="primary" size="large" round onPress={this.chooseImage} >
+              <Text bold size={14} style={{ color: "white" }}>
+                Scan Report
+              </Text>
+            </Button>
+            <Button color="primary" size="large" round onPress={this.launchImageLibrary}>
+              <Text bold size={14} style={{ color: "white" }}>
+                Select Report
+              </Text>
+            </Button>
+          </Block>
         </SafeAreaView>
-      </Block>        
+      </Block>
     );
   }
 };
@@ -298,35 +277,37 @@ const styles = StyleSheet.create({
   body: {
     // backgroundColor: Colors.white,
     // justifyContent: 'center',
-    height:hp('100%')
+    height: hp('100%')
     // borderColor: 'black',
     // borderWidth: 1,
     // height: Dimensions.get('screen').height - 20,
     // width: Dimensions.get('screen').width
   },
   ImageSections: {
-    display: 'flex',
-    flexDirection: 'row',
+    // display: 'flex',
+    // flex: 1,
+    // flexDirection: 'row',
     // paddingHorizontal: 8,
-    paddingTop:hp('3%'),
-    paddingHorizontal: wp('1%'),
+    // paddingTop: hp('3%'),
+    // paddingHorizontal: wp('1%'),
     // paddingVertical: 8,
-    justifyContent: 'center'
+    // justifyContent: 'center'
   },
   images: {
-    width: wp('100%'),
-    height: hp('70%'),
+    width: 250,
+    height: 250,
     borderColor: 'white',
     borderWidth: 1,
-   marginHorizontal: 3
-   
+    marginHorizontal: 3
+
   },
   btnParentSection: {
+    flex: 2,
     alignItems: 'center',
     // marginTop:10
     // height:hp('100%'),
     // backgroundColor: 'white',
-    marginTop:hp('4%')
+    // marginTop: hp('4%')
   },
   btnSection: {
     // width: 225,
@@ -339,14 +320,14 @@ const styles = StyleSheet.create({
     // borderRadius: 3,
     borderRadius: hp('5%'),
     // marginBottom:10
-    marginBottom:hp('2%')
+    marginBottom: hp('2%')
   },
   btnText: {
     textAlign: 'center',
     color: 'white',
     // fontSize: 14,
     fontSize: hp('2.5%'),
-    fontWeight:'bold'
+    fontWeight: 'bold'
   }
 });
 
